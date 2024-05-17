@@ -1,0 +1,18 @@
+{
+  "name": "typescript-generics-decor",
+  "version": "1.0.0",
+  "description": "generics and decorator practice",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx tsc && node ./dist/index.js"
+  },
+  "author": "Isaac Jimenez",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.12.12",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}
