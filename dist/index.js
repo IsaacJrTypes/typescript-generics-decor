@@ -1,46 +1,38 @@
-"use strict";
-/*
-Create a generic identity function that takes an argument of type T and returns a value of type T.
-Example usage: identity<number>(1) should return 1, and identity<string>("hello") should return "hello".
-*/
-function checkType(arg) {
-    return arg;
-}
-const msg = checkType("hello");
-console.log(msg);
-const msg2 = checkType(1);
-console.log(msg2);
-/*
-Write a function reverseArray<T> that takes an array of elements of type T and returns a new array with the elements in reverse order.
-Ensure type safety by restricting the function to only work with arrays.
-*/
-function reverseArray(arr) {
-    arr.reverse();
-    return arr;
-}
-const arr = reverseArray(["1", "2", "3", "4"]);
-console.log(arr);
-/*
-Develop a function mapObject<K, V, U> that takes an object with keys of type K and values of type V, along with a mapping function that converts V to another type U. Return a new object with the same keys but values of type U.
-Example usage: mapObject({a: 1, b: 2}, x => x.toString()) should return {a: "1", b: "2"}.
-*/
-function mapObject(obj, callback) {
-    const newObj = {};
-    // iterate items
-    for (const key in obj) {
-        newObj[key] = callback(obj[key]);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import log from './decoratorsSimpleLogger.js';
+class MyTestClass {
+    constructor(fridge, freezer) {
+        this.fridge = fridge;
+        this.freezer = freezer;
     }
-    return newObj;
+    addFridge(item) {
+        this.fridge.push(item);
+    }
+    addFreezer(item) {
+        this.freezer.push(item);
+    }
 }
-console.log(mapObject({ a: 1, b: 2 }, x => x.toString()));
-/*
-Implement a generic function filterArray<T> that filters elements of an array based on a predicate function. The predicate function should take an element of type T and return a boolean.
-Example usage: filterArray<number>([1, 2, 3, 4], x => x % 2 === 0) should return [2, 4].
-*/
-function filterArray(arr, callback) {
-    return arr.filter((val) => {
-        return callback(val);
-    });
-}
-console.log(filterArray([1, 2, 3, 4], x => x % 2 === 0));
+__decorate([
+    log,
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], MyTestClass.prototype, "addFridge", null);
+__decorate([
+    log,
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], MyTestClass.prototype, "addFreezer", null);
+const appliance = new MyTestClass([], []);
+appliance.addFridge("meat");
+appliance.addFreezer("peas");
 //# sourceMappingURL=index.js.map
