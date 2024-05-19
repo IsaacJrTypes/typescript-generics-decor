@@ -7,11 +7,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import log from './decoratorsSimpleLogger.js';
-class MyTestClass {
-    constructor(fridge, freezer) {
+import { log, simpleLogger, readOnly } from './decoratorsSimpleLogger.js';
+let MyTestClass = class MyTestClass {
+    constructor(fridge, freezer, groceryList) {
         this.fridge = fridge;
         this.freezer = freezer;
+        this._groceryList = groceryList;
     }
     addFridge(item) {
         this.fridge.push(item);
@@ -19,7 +20,10 @@ class MyTestClass {
     addFreezer(item) {
         this.freezer.push(item);
     }
-}
+    get groceryList() {
+        return this._groceryList;
+    }
+};
 __decorate([
     log,
     __metadata("design:type", Function),
@@ -32,7 +36,26 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], MyTestClass.prototype, "addFreezer", null);
-const appliance = new MyTestClass([], []);
+__decorate([
+    readOnly,
+    __metadata("design:type", Array),
+    __metadata("design:paramtypes", [])
+], MyTestClass.prototype, "groceryList", null);
+MyTestClass = __decorate([
+    simpleLogger,
+    __metadata("design:paramtypes", [Array, Array, Array])
+], MyTestClass);
+const appliance = new MyTestClass([], [], ['nuts', 'milk', 'cat treats']);
 appliance.addFridge("meat");
+appliance.addFridge("cake");
 appliance.addFreezer("peas");
+appliance.addFreezer("ice cream");
+try {
+    appliance.groceryList[0] = "pork belly";
+    console.log(appliance.groceryList);
+}
+catch (e) {
+    console.error(e);
+}
+console.log(appliance.groceryList);
 //# sourceMappingURL=index.js.map
